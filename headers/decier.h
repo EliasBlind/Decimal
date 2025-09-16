@@ -1,4 +1,7 @@
-#ifndef DECIMALDEF_H
+#ifndef DECIER_H
+#define DECIER_H
+
+#define BYTES_OF_NUMBER 3
 
 #define OK 0
 
@@ -17,4 +20,8 @@
 // Other functions
 #define CALCULATION_ERROR 1
 
-#endif // DECIMALDEF_H
+// Sign bit
+#define SIGN_BIT_NEGATIVE 1
+#define SIGN_BIT_POSITIVE 0
+
+#endif // DECIER_H
