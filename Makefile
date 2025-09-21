@@ -62,3 +62,4 @@ build: all
 test: $(LIB)
 	$(CC) $(CFLAGS) $(TFLAGS) $(TESTS_SRCS) $(LIB) -o $(TEST_EXEC)
 	./$(TEST_EXEC)
+	
