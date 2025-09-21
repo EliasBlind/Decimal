@@ -26,9 +26,9 @@ int main() {
     srunner_run_all(suite_runner, CK_NORMAL);
     int failed_count = srunner_ntests_failed(suite_runner);
     if (failed_count != 0) {
-
+        printf("Tests failed: %d\n", failed_count);
         return 1;
     }
-
+    printf("All tests passed\n");
     return 0;
 }

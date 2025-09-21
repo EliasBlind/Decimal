@@ -63,4 +63,8 @@ build: all
 test: $(LIB)
 	$(CC) $(CFLAGS) $(TFLAGS) $(TESTS_SRCS) $(LIB) -o $(TEST_EXEC)
 	./$(TEST_EXEC)
-	
+
+gcov_report:
+	@echo void epite
+
+s21_decimal.a: $(LIB)
