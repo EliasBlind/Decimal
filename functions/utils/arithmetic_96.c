@@ -47,7 +47,26 @@ int add_96(s21_decimal src, s21_decimal dst, s21_decimal *result) {
 
 int sub_96(s21_decimal *src, int32_t dst) {
     CHECK_NULL(src);
-    
+
+    // Handle edge cases
+    if (dst == 0) {
+        return OK;
+    }
+
+    // Convert dst to s21_decimal
+    s21_decimal dst_decimal = {0};
+    dst_decimal.fields.lo32 = (uint32_t)abs(dst);
+    dst_decimal.fields.negative = (dst < 0) ? 1 : 0;
+
+    // Perform subtraction
+    s21_decimal result = {0};
+    if (s21_sub(*src, dst_decimal, &result) != 0) {
+        return ERROR;
+    }
+
+    // Copy the result back to src
+    *src = result;
+    return OK;
 }
 
 int mul_96(s21_decimal *src, int32_t dst) {
