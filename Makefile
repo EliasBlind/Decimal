@@ -1,6 +1,6 @@
 # Compiler and flags
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -std=c11 -I. -I./headers
+CFLAGS = -Wall -Wextra -Werror -std=c11 -I. $(addprefix -I ,$(INCLUDE_DIRS))
 TFLAGS = -DTEST
 
 # Archive and flags
@@ -11,6 +11,7 @@ ARFLAGS = rcs
 SRC_DIR = functions
 OBJ_DIR = obj
 TEST_DIR = tests
+INCLUDE_DIRS = $(shell find headers -type d)
 
 # Library name and output
 LIB_NAME = s21_decimal
