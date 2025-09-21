@@ -2,9 +2,6 @@
 #define S21_DECIMAL_H
 
 #include <stdint.h>
-#include <limits.h>
-
-#define S21_DECIMAL_MAX ((s21_decimal){UINT32_MAX, UINT32_MAX, UINT32_MAX, 0})
 
 /**
  * @brief Structure to represent a decimal number.

@@ -21,11 +21,11 @@ int add_96(s21_decimal src, s21_decimal dst, s21_decimal *result) {
     CHECK_NULL(result);
 
     // Handle edge cases
-    if (is_equal_96(src, (s21_decimal){0, 0, 0, 0})) {
+    if (is_equal_96(src, (s21_decimal){0})) {
         *result = dst;
         return OK;
     }
-    if (is_equal_96(dst, (s21_decimal){0, 0, 0, 0})) {
+    if (is_equal_96(dst, (s21_decimal){0})) {
         *result = src;
         return OK;
     }

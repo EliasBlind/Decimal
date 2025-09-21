@@ -1,6 +1,10 @@
 #ifndef DECIER_H
 #define DECIER_H
 
+#include <stdint.h>
+
+#define S21_DECIMAL_MAX ((s21_decimal){ .bits = {UINT32_MAX, UINT32_MAX, UINT32_MAX, 0} })
+
 #define BYTES_OF_NUMBER 3
 
 #define OK 0
