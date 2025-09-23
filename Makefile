@@ -1,6 +1,20 @@
 # Compiler and flags
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -std=c11 -I. $(addprefix -I ,$(INCLUDE_DIRS))
+PLATFORM_CFLAGS =
+
+# Detect operating system
+UNAME_S := $(shell uname -s)
+
+ifeq ($(UNAME_S),Darwin)
+    CC = clang
+    PLATFORM_CFLAGS = -D_DARWIN_C_SOURCE
+else ifeq ($(UNAME_S),Linux)
+    PLATFORM_CFLAGS = -D_GNU_SOURCE
+else ifeq ($(OS),Windows_NT)
+    PLATFORM_CFLAGS = -D_WIN32_WINNT=0x0600
+endif
+
+CFLAGS = -Wall -Wextra -Werror -std=c11 $(PLATFORM_CFLAGS)  -I. $(addprefix -I ,$(INCLUDE_DIRS))
 TFLAGS = -DTEST
 
 # Archive and flags
@@ -67,4 +81,14 @@ test: $(LIB)
 gcov_report:
 	@echo void epite
 
+gcrp: gcov_report
+
 s21_decimal.a: $(LIB)
+
+info:
+	@echo "=== Build Information ==="
+	@echo "	Platform: $(UNAME_S)"
+	@echo "	Compiler: $(CC)"
+	@echo "	CFLAGS: $(CFLAGS)"
+	@echo "	Source files: $(words $(SRCS))"
+	@echo "	Test files: $(words $(TESTS_SRCS))"

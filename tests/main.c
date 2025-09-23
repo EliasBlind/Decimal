@@ -1,10 +1,11 @@
 #include "s21_decimal.h"
-#include "tcase.h"
+#include "tcases.h"
 
 #include <stdio.h>
 #include <check.h>
 
-Suite *init_suite(void) {
+Suite *init_suite(void)
+{
     Suite *suite = suite_create("Decimal testing");
 
     TCase *test_cases[] = {
@@ -14,18 +15,22 @@ Suite *init_suite(void) {
         other(),
     };
     const int num_cases = sizeof(test_cases) / sizeof(test_cases[0]);
-    for(int i = 0; i < num_cases; i++) {
+    for (int i = 0; i < num_cases; i++)
+    {
         suite_add_tcase(suite, test_cases[i]);
     }
     return suite;
 }
 
-int main() {
-    const Suite *suite = init_suite();
+int main(void)
+{
+    Suite *suite = init_suite();
     SRunner *suite_runner = srunner_create(suite);
     srunner_run_all(suite_runner, CK_NORMAL);
-    int failed_count = srunner_ntests_failed(suite_runner);
-    if (failed_count != 0) {
+    const int failed_count = srunner_ntests_failed(suite_runner);
+    if (failed_count != 0)
+    {
+        printf("\033[31m");
         printf("Tests failed: %d\n", failed_count);
         return 1;
     }
