@@ -3,9 +3,9 @@
 
 #include <check.h>
 
-TCase *arithmetic();
-TCase *comparision();
-TCase *converters();
-TCase *other();
+TCase *arithmetic(void);
+TCase *comparision(void);
+TCase *converters(void);
+TCase *other(void);
 
 #endif // TCASE_H

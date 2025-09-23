@@ -14,7 +14,7 @@ else ifeq ($(OS),Windows_NT)
     PLATFORM_CFLAGS = -D_WIN32_WINNT=0x0600
 endif
 
-CFLAGS = -Wall -Wextra -Werror -std=c11 $(PLATFORM_CFLAGS)  -I. $(addprefix -I ,$(INCLUDE_DIRS))
+CFLAGS = -Wall -Wextra -Werror -std=c11 $(PLATFORM_CFLAGS)  -I. $(addprefix -I ,$(INCLUDE_TESTS_DIRS))
 TFLAGS = -DTEST
 
 # Archive and flags
@@ -25,7 +25,7 @@ ARFLAGS = rcs
 SRC_DIR = functions
 OBJ_DIR = obj
 TEST_DIR = tests
-INCLUDE_DIRS = $(shell find headers -type d)
+INCLUDE_TESTS_DIRS = $(shell find headers -type d)
 
 # Library name and output
 LIB_NAME = s21_decimal
