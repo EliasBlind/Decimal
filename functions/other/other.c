@@ -14,7 +14,7 @@ int s21_truncate(s21_decimal value, s21_decimal *result) {
     }
     memcpy(result, &value, sizeof(value));
     result->fields.exponent = 0;
-    return OK;
+     return OK;
 }
 */
 

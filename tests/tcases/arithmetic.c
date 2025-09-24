@@ -21,7 +21,7 @@ void add_t1(void)
     s21_decimal v2 = decimal_create(0, UINT32_MAX, 0, SIGN_BIT_POSITIVE);
     s21_decimal result;
     uint64_t buffer = UINT32_MAX + UINT32_MAX;
-    s21_decimal answer = decimal_create(buffer >> 32, buffer, 0, SIGN_BIT_POSITIVE);
+    s21_decimal answer = decimal_create(0, buffer, buffer >> 32, SIGN_BIT_POSITIVE);
     int error = s21_add(v1, v2, &result);
     ck_assert_int_eq(error, OK);
     eq_decimal(result, answer);
@@ -37,7 +37,7 @@ void add_t2_exponent(void)
     int error = s21_add(v1, v2, &result);
     uint64_t buffer = UINT32_MAX + UINT32_MAX;
     buffer *= v1.fields.exponent - v2.fields.exponent;
-    s21_decimal answer = decimal_create(buffer >> 32, buffer, 0, SIGN_BIT_POSITIVE);
+    s21_decimal answer = decimal_create(0, buffer, buffer >> 32, SIGN_BIT_POSITIVE);
     answer.fields.exponent = v1.fields.exponent;
     ck_assert_int_eq(error, OK);
     eq_decimal(result, answer);
@@ -45,8 +45,8 @@ void add_t2_exponent(void)
 
 void add_t3_infinity(void)
 {
-    s21_decimal v1 = decimal_create(UINT32_MAX, UINT32_MAX, UINT32_MAX - 1, SIGN_BIT_POSITIVE);
-    s21_decimal v2 = decimal_create(0, 0, 1, SIGN_BIT_POSITIVE);
+    s21_decimal v1 = decimal_create(UINT32_MAX - 1, UINT32_MAX, UINT32_MAX, SIGN_BIT_POSITIVE);
+    s21_decimal v2 = decimal_create(1, 0, 0, SIGN_BIT_POSITIVE);
     s21_decimal result;
     v1.fields.exponent = UINT8_MAX;
     v2.fields.exponent = 2;
@@ -56,12 +56,12 @@ void add_t3_infinity(void)
 
 void add_t4_low_number(void)
 {
-    s21_decimal v1 = decimal_create(0, 0, 10, SIGN_BIT_POSITIVE);
-    s21_decimal v2 = decimal_create(0, 0, 5, SIGN_BIT_POSITIVE);
+    s21_decimal v1 = decimal_create(10, 0, 0, SIGN_BIT_POSITIVE);
+    s21_decimal v2 = decimal_create(5, 0, 0, SIGN_BIT_POSITIVE);
     s21_decimal result;
     v2.fields.exponent = 30;
     int error = s21_add(v1, v2, &result);
-    s21_decimal answer = decimal_create(0, 0, 11, SIGN_BIT_POSITIVE);
+    s21_decimal answer = decimal_create(11, 0, 0, SIGN_BIT_POSITIVE);
     ck_assert_int_eq(error, OK);
     eq_decimal(result, answer);
 }
@@ -80,9 +80,9 @@ void add_t5(void)
 void add_t6(void)
 {
     s21_decimal v1 = decimal_create(0, UINT32_MAX, 0, SIGN_BIT_POSITIVE);
-    s21_decimal v2 = decimal_create(0, UINT32_MAX, 1, SIGN_BIT_NEGATIVE);
+    s21_decimal v2 = decimal_create(1, UINT32_MAX, 0, SIGN_BIT_NEGATIVE);
     s21_decimal result;
-    s21_decimal answer = decimal_create(0, 0, 1, SIGN_BIT_NEGATIVE);
+    s21_decimal answer = decimal_create(1, 0, 0, SIGN_BIT_NEGATIVE);
     int error = s21_add(v1, v2, &result);
     ck_assert_int_eq(error, OK);
     eq_decimal(result, answer);
@@ -107,10 +107,10 @@ START_TEST(testing_add)
 
 void sub_t1(void)
 {
-    s21_decimal v1 = decimal_create(0, UINT32_MAX, 1, SIGN_BIT_POSITIVE);
+    s21_decimal v1 = decimal_create(1, UINT32_MAX, 0, SIGN_BIT_POSITIVE);
     s21_decimal v2 = decimal_create(0, UINT32_MAX, 0, SIGN_BIT_POSITIVE);
     s21_decimal result;
-    s21_decimal answer = decimal_create(0, 0, 1, SIGN_BIT_POSITIVE);
+    s21_decimal answer = decimal_create(1, 0, 0, SIGN_BIT_POSITIVE);
     int error = s21_sub(v1, v2, &result);
     ck_assert_int_eq(error, OK);
     eq_decimal(result, answer);
@@ -126,7 +126,7 @@ void sub_t2_exponent(void)
     int error = s21_sub(v1, v2, &result);
     uint64_t buffer = UINT32_MAX + UINT32_MAX;
     buffer *= v1.fields.exponent - v2.fields.exponent;
-    s21_decimal answer = decimal_create(buffer >> 32, buffer, 0, SIGN_BIT_POSITIVE);
+    s21_decimal answer = decimal_create(0, buffer, buffer >> 32, SIGN_BIT_POSITIVE);
     answer.fields.exponent = v1.fields.exponent;
     ck_assert_int_eq(error, OK);
     eq_decimal(result, answer);
@@ -142,7 +142,7 @@ void sub_t3_exponent(void)
     int error = s21_sub(v1, v2, &result);
     uint64_t buffer = UINT32_MAX + UINT32_MAX;
     buffer *= v1.fields.exponent - v2.fields.exponent;
-    s21_decimal answer = decimal_create(buffer >> 32, buffer, 0, SIGN_BIT_NEGATIVE);
+    s21_decimal answer = decimal_create(0, buffer, buffer >> 32, SIGN_BIT_NEGATIVE);
     answer.fields.exponent = v1.fields.exponent;
     ck_assert_int_eq(error, OK);
     eq_decimal(result, answer);
@@ -150,8 +150,8 @@ void sub_t3_exponent(void)
 
 void sub_t4_infinity(void)
 {
-    s21_decimal v1 = decimal_create(UINT32_MAX, UINT32_MAX, UINT32_MAX - 1, SIGN_BIT_NEGATIVE);
-    s21_decimal v2 = decimal_create(0, 0, 1, SIGN_BIT_POSITIVE);
+    s21_decimal v1 = decimal_create(UINT32_MAX - 1, UINT32_MAX, UINT32_MAX, SIGN_BIT_NEGATIVE);
+    s21_decimal v2 = decimal_create(1, 0, 0, SIGN_BIT_POSITIVE);
     s21_decimal result;
     v1.fields.exponent = UINT8_MAX;
     v2.fields.exponent = 2;
@@ -161,24 +161,24 @@ void sub_t4_infinity(void)
 
 void sub_t5_low_number(void)
 {
-    s21_decimal v1 = decimal_create(0, 0, 10, SIGN_BIT_NEGATIVE);
-    s21_decimal v2 = decimal_create(0, 0, 5, SIGN_BIT_POSITIVE);
+    s21_decimal v1 = decimal_create(10, 0, 0, SIGN_BIT_NEGATIVE);
+    s21_decimal v2 = decimal_create(5, 0, 0, SIGN_BIT_POSITIVE);
     s21_decimal result;
     v2.fields.exponent = 30;
     int error = s21_sub(v1, v2, &result);
-    s21_decimal answer = decimal_create(0, 0, 10, SIGN_BIT_POSITIVE);
+    s21_decimal answer = decimal_create(10, 0, 0, SIGN_BIT_POSITIVE);
     ck_assert_int_eq(error, OK);
     eq_decimal(result, answer);
 }
 
 void sub_t6_low_number(void)
 {
-    s21_decimal v1 = decimal_create(0, 0, 10, SIGN_BIT_NEGATIVE);
-    s21_decimal v2 = decimal_create(0, 0, 6, SIGN_BIT_POSITIVE);
+    s21_decimal v1 = decimal_create(10, 0, 0, SIGN_BIT_NEGATIVE);
+    s21_decimal v2 = decimal_create(6, 0, 0, SIGN_BIT_POSITIVE);
     s21_decimal result;
     v2.fields.exponent = 30;
     int error = s21_sub(v1, v2, &result);
-    s21_decimal answer = decimal_create(0, 0, 9, SIGN_BIT_POSITIVE);
+    s21_decimal answer = decimal_create(9, 0, 0, SIGN_BIT_POSITIVE);
     ck_assert_int_eq(error, OK);
     eq_decimal(result, answer);
 }
