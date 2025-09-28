@@ -1,6 +1,5 @@
 #include "s21_decimal.h"
 #include "decier.h"
-#include "thelper.h"
 
 #include <check.h>
 #include <limits.h>

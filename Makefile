@@ -14,8 +14,10 @@ else ifeq ($(OS),Windows_NT)
     PLATFORM_CFLAGS = -D_WIN32_WINNT=0x0600
 endif
 
+#CFLAGS = -Wall -Wextra -Werror -std=c11 -I. $(addprefix -I ,$(INCLUDE_DIRS))
 CFLAGS = -Wall -Wextra -Werror -std=c11 $(PLATFORM_CFLAGS)  -I. $(addprefix -I ,$(INCLUDE_TESTS_DIRS))
-TFLAGS = -DTEST
+TFLAGS = -DTEST -lcheck -lm -lrt -pthread 
+
 
 # Archive and flags
 AR = ar
@@ -80,10 +82,6 @@ test: $(LIB)
 
 gcov_report:
 	@echo void epite
-
-gcrp: gcov_report
-
-s21_decimal.a: $(LIB)
 
 info:
 	@echo "=== Build Information ==="

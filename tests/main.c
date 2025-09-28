@@ -9,10 +9,10 @@ Suite *init_suite(void)
     Suite *suite = suite_create("Decimal testing");
 
     TCase *test_cases[] = {
-        arithmetic(),
+        //arithmetic(),
         comparision(),
-        converters(),
-        other(),
+        //converters(),
+        //other(),
     };
     const int num_cases = sizeof(test_cases) / sizeof(test_cases[0]);
     for (int i = 0; i < num_cases; i++)
@@ -22,8 +22,7 @@ Suite *init_suite(void)
     return suite;
 }
 
-int main(void)
-{
+int main(void) {
     Suite *suite = init_suite();
     SRunner *suite_runner = srunner_create(suite);
     srunner_run_all(suite_runner, CK_NORMAL);

@@ -1,0 +1,29 @@
+{
+    "cSpell.words": [
+        "DECIER",
+        "decreate",
+        "DTEST",
+        "lcheck",
+        "pthread",
+        "srunner",
+        "TFLAGS",
+        "Wextra"
+    ],
+    "make-to-cpp-props.configurations": [
+        {
+            "name": "default",
+            "cStandard": "c11",
+            "cppStandard": "c++11",
+            "includePath": [],
+            "defines": []
+        }
+    ],
+    "files.associations": {
+        "stdint.h": "c",
+        "test": "c",
+        "chrono": "c",
+        "functional": "c",
+        "__locale": "c",
+        "decier.h": "c"
+    }
+}
